@@ -2,6 +2,9 @@
 #include "temperature.h"
 #include "stm32l1xx_adc.h"
 
+double temperature_p;
+double temperature_q;
+
 void temperature_init()
 {
 	 //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //enable clock for GPIOA
@@ -21,6 +24,15 @@ void temperature_init()
 
 	  ADC_Init(ADC1, &ADC_InitStructure);
 	  ADC_Cmd(ADC1, ENABLE);
+
+	  temperature_p = 1.0;
+	  temperature_q = 0.0;
+}
+
+void temperature_calibrate(double p, double q)
+{
+	temperature_p = p;
+	temperature_q = q;
 }
 
 uint16_t temperature_raw()
@@ -31,10 +43,7 @@ uint16_t temperature_raw()
 	return ADC_GetConversionValue(ADC1);
 }
 
-double temperature()
+double temperature(uint16_t raw)
 {
-	uint16_t raw;
-	raw = temperature_raw();
-	//1.66mV / C
-	return ((double)raw/21.845-656.8)/1.66;
+	return ((double)raw * temperature_p + temperature_q);
 }
