@@ -29,6 +29,10 @@
 #include <stdio.h>
 #include "mcu.h"
 #include "usart.h"
+#include "temp_calibrate.h"
+#include "i2c.h"
+#include "eeprom.h"
+#include "mcp9808.h"
 
 /**
 **===========================================================================
@@ -50,29 +54,41 @@ void handleReceivedChar(unsigned char data)
 int main(void)
 {
 	char s[1024];
+	uint16_t raw_temperature;
+	uint16_t tmp1, tmp2;
+
 	/**
-	 * Zapojenie
-	 * UART1
-	 * fialova	pa10	rx
-	 * hneda	pa9		tx
-	 *
+	 * Connection
 	 * UART2
-	 * fialova	pa3		rx
-	 * hneda	pa2		tx
-	 *
-	 * UART3
-	 * fialova	pc11	rx
-	 * hneda	pc10	tx
+	 * pa3		rx
+	 * pa2		tx
 	 */
+
+	//init peripheries
 	initUSART2();
 	PutsUART2("Initializing...\n");
 	temperature_init();
+	eeprom_init();
+	initI2C2();
+
+	//init with calibrated data
+	tmp1 = read_eeprom_16(EEPROM_START_ADDRESS);
+	tmp2 = read_eeprom_16(EEPROM_START_ADDRESS+2);
+	if(tmp1 != 0xffffffff && tmp2 != 0xffffffff) {
+		temperature_calibrate(tmp1, tmp2);
+	}
 
     while(1)
     {
-    		sprintf(s,"T: %d - %f\n",temperature_raw(), temperature());
-    		PutsUART2(s);
-    	    delay_us(100000);
+    	//standard beh
+    	raw_temperature = temperature_raw();
+    	eeprom_log_next(0, raw_temperature);
+
+    	sprintf(s,"T: %d - %f - %d\n",raw_temperature, temperature(raw_temperature),mcp9808_gettemp(0x18));
+    	PutsUART2(s);
+
+    	// replace with sleep
+    	delay_us(100000);
     }
 
 	return 0;
