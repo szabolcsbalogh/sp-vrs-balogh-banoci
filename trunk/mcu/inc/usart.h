@@ -10,12 +10,12 @@
 
 #include "mcu.h"
 
-void initUSART2(void);
+void initUSART1(void);
 
-void PutsUART2(char *str);
-void PutcUART2(char c);
-void PutbUART2(char *str, unsigned short length);
+void PutsUART1(char *str);
+void PutcUART1(char c);
+void PutbUART1(char *str, unsigned short length);
 
-void RegisterCallbackUART2(void *callback);
+void RegisterCallbackUART1(void *callback);
 
 #endif /* USART_H_ */
