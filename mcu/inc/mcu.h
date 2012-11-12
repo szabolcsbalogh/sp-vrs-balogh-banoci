@@ -12,6 +12,8 @@
   */
 #ifndef __MCU_H
 #define __MCU_H
+#define double2data(x) (*(uint64_t *)(&x))
+#define data2double(x) (*(double *)(&x))
 
 #include "stm32l1xx.h"
 #include "stm32l1xx_conf.h"

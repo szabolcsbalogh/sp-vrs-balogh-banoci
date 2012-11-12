@@ -1,11 +1,18 @@
+/**
+  ******************************************************************************
+  * @file    firmware/src/mcu/i2c.h
+  * @author  Jozef Rodina
+  * @version V1.0.0
+  * @date    24-January-2012
+  * @brief   I2C configuration file.
+  ******************************************************************************
+  *
+  * <h2><center>&copy; COPYRIGHT 2012 Jozef Rodina</center></h2>
+  ******************************************************************************
+  */
+
 #ifndef __I2C_H
 #define __I2C_H
-
-void initI2C2(void);
-
-////////////////////////////////////////////////////////
-
-
 
 /* Definition for SPI3 HW resources ********************************************/
 #define I2C1_SCL_PIN                    GPIO_Pin_8	//PB
@@ -17,7 +24,8 @@ void initI2C2(void);
 #define I2C1_CONTROL_PINS_PORT_CLK      RCC_AHBPeriph_GPIOB
 #define I2C1_CONTROL_PINS_PORT			GPIOB
 
-#define I2C_TIMEOUT 100
+#define I2C_TIMEOUT 500000
+//100
 
 /* I2C SPE mask */
 #define CR1_PE_Set              ((uint16_t)0x0001)
@@ -117,7 +125,7 @@ typedef enum
     Success
 }Status;
 
-
+void initI2C1(void);
 Status writeByteI2C1(unsigned char deviceAddress, unsigned char registerAddress, unsigned char data);
 Status writeWordI2C1(unsigned char deviceAddress, unsigned char registerAddress, unsigned short data);
 Status writeArrayI2C1(unsigned char deviceAddress, unsigned char registerAddress, unsigned char *data, unsigned short length);

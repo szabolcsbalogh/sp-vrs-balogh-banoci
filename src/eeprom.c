@@ -7,12 +7,18 @@ void eeprom_init() {
 	for(eeprom_log_at = EEPROM_LOG_START_ADDRESS; eeprom_log_at < EEPROM_END_ADDRESS && read_eeprom_32(eeprom_log_at) != (uint32_t)0xffffffff; eeprom_log_at += 4);
 }
 
+void eeprom_clear() {
+	for(eeprom_log_at = EEPROM_LOG_START_ADDRESS; eeprom_log_at < EEPROM_END_ADDRESS; eeprom_log_at += 8)
+		write_eeprom_32(eeprom_log_at, (uint32_t)0xffffffff);
+	eeprom_init();
+}
+
 void eeprom_log_next(uint16_t time, uint16_t temperature) {
 	//erase next as bookmark
 	if(eeprom_log_at + 4 < EEPROM_END_ADDRESS)
-		write_eeprom_32(eeprom_log_at + 4, (uint32_t)0xfffffffff);
+		write_eeprom_32(eeprom_log_at + 4, (uint32_t)0xffffffff);
 	else
-		write_eeprom_32(EEPROM_LOG_START_ADDRESS, (uint32_t)0xfffffffff);
+		write_eeprom_32(EEPROM_LOG_START_ADDRESS, (uint32_t)0xffffffff);
 	//write data
 	write_eeprom_16(eeprom_log_at, time);
 	write_eeprom_16(eeprom_log_at + 2, temperature);

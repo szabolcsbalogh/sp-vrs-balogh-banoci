@@ -35,6 +35,14 @@ void temperature_calibrate(double p, double q)
 	temperature_q = q;
 }
 
+double temperature_getp() {
+	return temperature_p;
+}
+
+double temperature_getq() {
+	return temperature_q;
+}
+
 uint16_t temperature_raw()
 {
 	ADC_RegularChannelConfig(ADC1, 16, 1, ADC_SampleTime_16Cycles);
