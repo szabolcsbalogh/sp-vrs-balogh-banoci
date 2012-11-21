@@ -129,6 +129,7 @@ void handleReceivedChar(unsigned char data)
 {
 	char s[128];
 	double temp;
+	int i;
 	switch(data) {
 	case 'h':
 		sprintf(s,"F - flow ON\nf - flow off\ng - get CSV\ne - erase data from EEPROM\n");
@@ -155,6 +156,17 @@ void handleReceivedChar(unsigned char data)
 	case 'c':
 		sprintf(s,"p=%f, q=%f\n",temperature_getp(),temperature_getq());
 		PutsUART1(s);
+		PutsUART1("p=");
+		for(i=0;i<8;i++) {
+			sprintf(s,"%5x",read_eeprom_8(EEPROM_START_ADDRESS+i));
+			PutsUART1(s);
+		}
+		PutsUART1("\nq=");
+		for(i=8;i<16;i++) {
+			sprintf(s,"%5x",read_eeprom_8(EEPROM_START_ADDRESS+i));
+			PutsUART1(s);
+		}
+		PutsUART1("\n");
 		break;
 	case 'e':
 		sprintf(s,"===EEPROM Clear start====\n");

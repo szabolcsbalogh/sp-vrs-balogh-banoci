@@ -10,7 +10,7 @@ void eeprom_init() {
 void eeprom_clear() {
 	for(eeprom_log_at = EEPROM_LOG_START_ADDRESS; eeprom_log_at < EEPROM_END_ADDRESS; eeprom_log_at += 8)
 		write_eeprom_32(eeprom_log_at, (uint32_t)0xffffffff);
-	eeprom_init();
+	eeprom_log_at = EEPROM_LOG_START_ADDRESS;
 }
 
 void eeprom_log_next(uint16_t time, uint16_t temperature) {
