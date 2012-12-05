@@ -1,10 +1,10 @@
 #define EEPROM_START_ADDRESS 0x08080000
 #define EEPROM_END_ADDRESS 0x08080FFF
-#define EEPROM_LOG_START_ADDRESS EEPROM_START_ADDRESS+0x400 //(reserve 1K for settings)
+#define EEPROM_LOG_START_ADDRESS EEPROM_START_ADDRESS+0x100 //(reserve 1K for settings)
 
 void eeprom_init();
 void eeprom_clear();
-void eeprom_log_next(uint16_t time, uint16_t temperature);
+void eeprom_log_next(uint32_t temperature);
 
 void write_eeprom_8(uint32_t address,uint8_t data);
 void write_eeprom_16(uint32_t address,uint16_t data);
