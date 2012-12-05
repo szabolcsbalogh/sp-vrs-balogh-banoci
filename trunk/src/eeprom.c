@@ -13,15 +13,14 @@ void eeprom_clear() {
 	eeprom_log_at = EEPROM_LOG_START_ADDRESS;
 }
 
-void eeprom_log_next(uint16_t time, uint16_t temperature) {
+void eeprom_log_next(uint32_t temperature) {
 	//erase next as bookmark
 	if(eeprom_log_at + 4 < EEPROM_END_ADDRESS)
 		write_eeprom_32(eeprom_log_at + 4, (uint32_t)0xffffffff);
 	else
 		write_eeprom_32(EEPROM_LOG_START_ADDRESS, (uint32_t)0xffffffff);
 	//write data
-	write_eeprom_16(eeprom_log_at, time);
-	write_eeprom_16(eeprom_log_at + 2, temperature);
+	write_eeprom_32(eeprom_log_at, temperature);
 	//set counter to next address
 	if(eeprom_log_at + 4 < EEPROM_END_ADDRESS)
 			eeprom_log_at += 4;

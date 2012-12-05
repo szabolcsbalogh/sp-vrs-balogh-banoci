@@ -53,11 +53,11 @@
 									<listOptionValue builtIn="false" value="USE_STDPERIPH_DRIVER"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.273193776" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/basic_project/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/basic_project/Libraries/STM32L1xx_StdPeriph_Driver/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/basic_project/mcu/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/basic_project/Libraries/CMSIS/CM3/CoreSupport}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/basic_project/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32L1xx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Thermosens/Libraries/STM32L1xx_StdPeriph_Driver/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Thermosens/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Thermosens/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32L1xx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Thermosens/Libraries/CMSIS/CM3/CoreSupport}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Thermosens/mcu/inc}&quot;"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1532108471" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" value="com.atollic.truestudio.common_options.target.endianess.little" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.942074645" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32L152RB" valueType="enumerated"/>
@@ -116,6 +116,14 @@
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.904332181" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.atollic.truestudio.exe.debug.2033273424.1968468094" name="Thermosens.elf" rcbsApplicability="disable" resourcePath="Debug/Thermosens.elf" toolsToInvoke="">
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.560815636" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.242326568" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.214831533" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Libraries"/>
